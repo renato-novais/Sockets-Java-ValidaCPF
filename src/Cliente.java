@@ -18,24 +18,19 @@ public class Cliente {
 
             //Recebe alguns dados do usuário
             BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Informe o número do CPF:");
+            System.out.println("Digite um CPF para verificação:");
             String cpf = buff.readLine();
 
             //Envia estes dados ao server
             saida.writeUTF(cpf);
 
             //Recebe a resposta do server
-            boolean resultado = entrada.readBoolean();
-
-            socket.close();
+            String resultado = entrada.readUTF();
 
             //Imprime a resposta do server
-            if (resultado) {
-                System.out.println("O CPF digitado é válido");
-                System.out.printf("%s", ValidaCpf.imprimeCPF(cpf));
-            } else {
-                System.out.println("O CPF digitado é inválido");
-            }
+            System.out.println(resultado);
+
+            socket.close();
 
         } catch (Exception e) {
 
